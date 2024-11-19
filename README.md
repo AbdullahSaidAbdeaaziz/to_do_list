@@ -4,7 +4,7 @@
 
 - To do list for creating simple tasks.
 
-## Functionalty
+## Functionality
 
 ---
 
