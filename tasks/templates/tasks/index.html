@@ -60,12 +60,13 @@
       <li class="list-group-item text-center">No tasks added yet!</li>
       {% endfor %}
     </ul>
-
+    {% if tasks %}
     <!-- Delete All Tasks Button -->
     <form method="POST" action="{% url 'delete_all_task' %}" class="mt-4"
-      onsubmit="return confirm('Are you sure you want to delete all tasks?');">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-danger btn-block">Delete All Tasks</button>
+    onsubmit="return confirm('Are you sure you want to delete all tasks?');">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger btn-block">Delete All Tasks</button>
+    {% endif %}
     </form>
   </div>
 
