@@ -4,18 +4,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>To-Do List</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
-<body class="bg-light">
+<body class="bg-light text-dark">
   <div class="container mt-5">
-    <!-- Header with Title and Sign Out Button -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h2>Welcome, {{ request.user.username }}! Your To-Do List</h2>
-      <a href="{% url 'logout_user' %}" class="btn btn-outline-danger">Sign Out</a>
+    <!-- Header with Dark Mode Toggle and Sign Out Button -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <!-- Dark Mode Toggle -->
+      <button id="darkModeToggle" class="btn btn-outline-secondary">
+        Toggle Dark Mode
+      </button>
+
+      <!-- Sign Out Button -->
+      <a href="{% url 'logout_user' %}" class="btn btn-outline-danger">
+        Sign Out
+      </a>
     </div>
+
+    <h1>Welcome, {{ user.username }}! To-Do List</h1>
 
     <!-- Form for Adding New Tasks -->
     <form method="POST" class="mb-4">
@@ -57,16 +67,16 @@
         </div>
       </li>
       {% empty %}
-      <li class="list-group-item text-center">No tasks added yet!</li>
+      <li class="list-group-item text-dark text-center">No tasks added yet!</li>
       {% endfor %}
     </ul>
     {% if tasks %}
     <!-- Delete All Tasks Button -->
     <form method="POST" action="{% url 'delete_all_task' %}" class="mt-4"
-    onsubmit="return confirm('Are you sure you want to delete all tasks?');">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger btn-block">Delete All Tasks</button>
-    {% endif %}
+      onsubmit="return confirm('Are you sure you want to delete all tasks?');">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger btn-block">Delete All Tasks</button>
+      {% endif %}
     </form>
   </div>
 
@@ -74,6 +84,40 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+
+      // Check saved preference
+      const savedMode = localStorage.getItem("darkMode");
+      if (savedMode === "enabled") {
+        body.classList.remove("bg-light", "text-dark");
+        body.classList.add("bg-dark", "text-light");
+      }
+      // } else {
+      //   body.classList.remove('bg-dark', 'text-light');
+      //   body.classList.add('bg-light', 'text-dark');
+      // }
+
+      // Toggle dark mode
+      darkModeToggle.addEventListener("click", function () {
+        body.classList.toggle("bg-light");
+        body.classList.toggle("text-dark");
+        body.classList.toggle("bg-dark");
+        body.classList.toggle("text-light");
+
+        // Save preference
+        if (body.classList.contains("bg-dark")) {
+          localStorage.setItem("darkMode", "enabled");
+        } else {
+          localStorage.setItem("darkMode", "disabled");
+        }
+      });
+    });
+  </script>
+
+
 </body>
 
 </html>
