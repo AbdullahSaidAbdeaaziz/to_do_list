@@ -19,9 +19,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
 
+
 urlpatterns = [
-    path("", lambda req: redirect("login")),
-    path('accounts/', include('accounts.urls')),
+    path("", lambda _: redirect("login")),
+    path("accounts/", include("accounts.urls")),
     path("tasks/", include("tasks.urls")),
     path("admin/", admin.site.urls),
 ]
