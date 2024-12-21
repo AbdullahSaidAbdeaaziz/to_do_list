@@ -1,28 +1,23 @@
 # TO-DO List
 
-----
-
 - To do list for creating simple tasks.
 
 ## Functionality
 
----
-
 1. CRUD operations.
-2. Login / signup.
+2. Login/signup.
 
-### Installations
+## Installations
 
----
-1. glone repo
+1. clone repo
 ```bash
-git clone https://github.com/AbdullahSaidAbdeaaziz/to-do-list
+git clone https://github.com/AbdullahSaidAbdeaaziz/to_do_list
 ```
 2. go to directory
 ```bash
-cd to-do-list
+cd to_do_list
 ```
-2. if u have `pipenv` installed.
+2. if you should have `pipenv` installed
 
 ```bash
 pipenv sync
